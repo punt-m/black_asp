@@ -1,0 +1,19 @@
+name: signalp
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python>=3.8
+  - pip
+  - numpy=1.19.2
+  - pip: 
+    - matplotlib>3.3.2
+    - torch>1.7.0,<2
+    - tqdm>4.46.1
+ 
+prefix: /mnt/scratch_dir/puntm/conda/envs/signalp
+environment:
+  - PYTHONPATH=/mnt/scratch_dir/puntm/signalp/signalp6_fast/pkgs/
+#
+#PYTHONPATH='/mnt/scratch_dir/puntm/signalp/signalp6_fast/pkgs/'
+#export PYTHONPATH

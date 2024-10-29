@@ -1,0 +1,7 @@
+name: fastx-toolkit
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - fastx_toolkit
+prefix: /mnt/scratch_dir/puntm/conda/envs/fastx-toolkit
