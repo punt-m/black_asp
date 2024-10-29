@@ -1,5 +1,31 @@
 threads:
-    template_rule: 1
-
+  default: 2
+  helixer: 1
+  fastp: 1
+  fastqc: 4
+  interproscan: 16
+  eggnog: 32
+  fun_annotate: 8
+  signalp: 8
 mem_gb:
-    template_rule: 1
+  default: 12
+  helixer: 32
+  fastp: 8
+  fastqc: 8
+  interproscan: 32
+  eggnog: 64
+  fun_annotate: 16
+  signalp: 16
+runtime_min:
+  default: 15
+  helixer: 15
+  fastp: 60
+  fastqc: 60
+  interproscan: 480 #Takes about 6.5h at this stage
+  eggnog: 120
+  fun_annotate: 60
+  signalp: 60
+queue:
+  default: 'bio'
+  helixer: 'bio-gpu-v100'
+

@@ -33,51 +33,88 @@ class JunoTemplate(Pipeline):
         self.parser.description = "Template juno pipeline. If you see this message please change it to something appropriate"
         
         self.add_argument(
-            "--example-option",
-            dest="example",
-            type=str,
-            required=False,
-            metavar="STR",
-            help="This is an optional argument, specific for this pipeline. General options are included in juno-library.",
+            "--db-dir",
+            type=Path,
+            nargs = "+",
+            default="/mnt/scratch_dir/puntm/",
+            metavar="DIR",
+            help="Dirs to bind in singularity",
+        )
+
+        self.add_argument(
+            "-mpt",
+            "--mean-quality-threshold",
+            type=int,
+            metavar="INT",
+            default=28,
+            help="Phred score to be used as threshold for cleaning (filtering) fastq files.",
+        )
+        self.add_argument(
+            "-ws",
+            "--window-size",
+            type=int,
+            metavar="INT",
+            default=5,
+            help="Window size to use for cleaning (filtering) fastq files.",
+        )
+        self.add_argument(
+            "-ml",
+            "--minimum-length",
+            type=int,
+            metavar="INT",
+            default=50,
+            help="Minimum length for fastq reads to be kept after trimming.",
         )
         
     def _parse_args(self) -> argparse.Namespace:
         args = super()._parse_args()
 
         # Optional arguments are loaded into self here
-        self.example: bool = args.example
+        self.db_dir: Path = args.db_dir
+        self.mean_quality_threshold: int = args.mean_quality_threshold
+        self.window_size: int = args.window_size
+        self.min_read_length: int = args.minimum_length
+
 
         return args
     
     # Extra class methods for this pipeline can be defined here
-    def example_class_method(self):
-        print(f"example option is set to {self.example}")
-
+    
     def setup(self) -> None:
         super().setup()
 
         if self.snakemake_args["use_singularity"]:
             self.snakemake_args["singularity_args"] = " ".join(
                 [
-                    self.snakemake_args["singularity_args"]
+                    self.snakemake_args["singularity_args"],
+                    f"--bind {self.db_dir}:{self.db_dir}",
+                #    f"--nv",
                 ] # paths that singularity should be able to read from can be bound by adding to the above list
             )
 
         # Extra class methods for this pipeline can be invoked here
-        if self.example:
-            self.example_class_method()
-
         with open(
             Path(__file__).parent.joinpath("config/pipeline_parameters.yaml")
         ) as f:
             parameters_dict = yaml.safe_load(f)
         self.snakemake_config.update(parameters_dict)
+        
+        #Read custom parameters as well: 
+        with open(
+            Path(__file__).parent.joinpath("config/config_params.yml")
+        ) as f:
+            params_dict = yaml.safe_load(f)
+        self.snakemake_config.update(params_dict)
 
         self.user_parameters = {
             "input_dir": str(self.input_dir),
             "output_dir": str(self.output_dir),
+            "db_dir": str(self.db_dir),
+            "mean_quality_threshold": int(self.mean_quality_threshold),
+            "window_size": int(self.window_size),
+            "min_read_length": int(self.min_read_length),
             "exclusion_file": str(self.exclusion_file),
-            "example": str(self.example), # other user parameters can be included in user_parameters.yaml here
+            "use_singularity": str(self.snakemake_args["use_singularity"]),
         }
 
 

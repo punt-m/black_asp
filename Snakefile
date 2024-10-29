@@ -9,17 +9,17 @@ for param in ["threads", "mem_gb"]:
     for k in config[param]:
         config[param][k] = int(config[param][k])
 
-# print(SAMPLES)
+print(config)
 
 OUT = config["output_dir"]
 
 localrules:
     all,
-
-
-include: "workflow/rules/rule.smk"
-
+include: "workflow/rules/clean_fastq.smk"
+include: "workflow/rules/spades.smk"
+include: "workflow/rules/helixer.smk"
 
 rule all:
     input:
-        expand(OUT + "/{sample}_combined.fastq", sample=SAMPLES),
+        expand(OUT + "/fun_annotate/{sample}", sample = SAMPLES),
+        expand(OUT + '/spades/{sample}', sample = SAMPLES),
