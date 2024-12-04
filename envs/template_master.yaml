@@ -12,4 +12,4 @@ dependencies:
   - pip=23.*
   - python=3.11.*
   - pip:
-    - "--editable=git+https://github.com/RIVM-bioinformatics/juno-library.git@v2.0.0#egg=juno_library"
+    - "--editable /mnt/scratch_dir/puntm/juno-library"

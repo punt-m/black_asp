@@ -10,13 +10,14 @@ rule clean_fastq:
         json=OUT + "/clean_fastq/{sample}_fastp.json",
     message:
         "Filtering reads for {wildcards.sample}."
-    conda:
-        "../envs/qc_and_clean.yaml"
+    #conda:
+    #    "../envs/qc_and_clean.yaml"
     container:
         "docker://biocontainers/fastp:v0.20.1_cv1"
     threads: config["threads"]["fastp"]
     resources:
         mem_gb=config["mem_gb"]["fastp"],
+        queue = config['queue']["default"]
     log:
         OUT + "/log/clean_fastq/clean_fastq_{sample}.log",
     params:
@@ -24,7 +25,7 @@ rule clean_fastq:
         window_size=config["window_size"],
         min_length=config["min_read_length"],
     shell:
-        """
+              """
 fastp --in1 {input.r1} \
 --in2 {input.r2} \
 --out1 {output.r1} \
@@ -43,7 +44,6 @@ fastp --in1 {input.r1} \
 --length_required {params.min_length} > {log} 2>&1
         """
 
-
 rule qc_raw_fastq:
     input:
         lambda wildcards: SAMPLES[wildcards.sample][wildcards.read],
@@ -52,13 +52,14 @@ rule qc_raw_fastq:
         zip=OUT + "/qc_raw_fastq/{sample}_{read}_fastqc.zip",
     message:
         "Running FastQC on pre-trimmed reads for {wildcards.sample}."
-    conda:
-        "../envs/qc_and_clean.yaml"
+    #conda:
+    #    "../envs/qc_and_clean.yaml"
     container:
         "docker://biocontainers/fastqc:v0.11.9_cv8"
     threads: config["threads"]["fastqc"]
     resources:
         mem_gb=config["mem_gb"]["fastqc"],
+        queue = config['queue']["default"]
     params:
         output_dir=OUT + "/qc_raw_fastq/",
     log:
@@ -77,13 +78,14 @@ rule qc_clean_fastq:
         zip=OUT + "/qc_clean_fastq/{sample}_p{read}_fastqc.zip",
     message:
         "Running FastQC after filtering/trimming {wildcards.sample}."
-    conda:
-        "../envs/qc_and_clean.yaml"
+    #conda:
+    #    "../envs/qc_and_clean.yaml"
     container:
         "docker://biocontainers/fastqc:v0.11.9_cv8"
     threads: config["threads"]["fastqc"]
     resources:
         mem_gb=config["mem_gb"]["fastqc"],
+        queue = config['queue']["default"]
     log:
         OUT + "/log/qc_clean_fastq/qc_clean_fastq_{sample}_{read}.log",
     params:

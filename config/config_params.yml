@@ -1,7 +1,7 @@
 eggnog:
   data_dir: '/mnt/scratch_dir/puntm/eggnog/'
   dia_db: '/mnt/scratch_dir/puntm/eggnog/euriomycetes.dmnd'
-fastx-toolkit:
+fastx_toolkit:
   blocksize: 60
 fun_annotate:
   species: 'Aspergillus niger'

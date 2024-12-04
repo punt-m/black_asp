@@ -3,10 +3,11 @@ threads:
   helixer: 1
   fastp: 1
   fastqc: 4
-  interproscan: 16
+  interproscan: 4
   eggnog: 32
   fun_annotate: 8
   signalp: 8
+  spades: 16
 mem_gb:
   default: 12
   helixer: 32
@@ -16,8 +17,10 @@ mem_gb:
   eggnog: 64
   fun_annotate: 16
   signalp: 16
+  spades: 16
 runtime_min:
   default: 15
+  spades: 180
   helixer: 15
   fastp: 60
   fastqc: 60

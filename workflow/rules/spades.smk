@@ -3,10 +3,12 @@ rule spades:
         R1 = OUT + "/clean_fastq/{sample}_pR1.fastq.gz",
         R2 = OUT + "/clean_fastq/{sample}_pR2.fastq.gz",
     output:
-        OUT + '/spades/{sample}'
+        directory(OUT + '/spades/{sample}')
+    threads:
+        config["threads"]["spades"]
     resources:
-        mem_gb = config["mem_gb"]["default"],
-        runtime_min = config["runtime_min"]["default"],
+        mem_gb = config["mem_gb"]["spades"],
+        runtime_min = config["runtime_min"]["spades"],
         queue = config['queue']["default"]
     log:
         OUT + "/log/spades/{sample}.log"
