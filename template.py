@@ -20,7 +20,7 @@ from version import __package_name__, __version__, __description__
 def main() -> None:
     juno_template = JunoTemplate()
     juno_template.run()
-
+    
 @dataclass
 class JunoTemplate(Pipeline):
     pipeline_name: str = __package_name__
@@ -65,6 +65,13 @@ class JunoTemplate(Pipeline):
             default=50,
             help="Minimum length for fastq reads to be kept after trimming.",
         )
+        self.add_argument(
+            "-c",
+            "--conda",
+            action = "store_true",
+            default=False,
+            help="Force conda use, default is off",
+        )
         
     def _parse_args(self) -> argparse.Namespace:
         args = super()._parse_args()
@@ -74,6 +81,7 @@ class JunoTemplate(Pipeline):
         self.mean_quality_threshold: int = args.mean_quality_threshold
         self.window_size: int = args.window_size
         self.min_read_length: int = args.minimum_length
+        self.conda: str = args.conda
 
 
         return args
@@ -82,15 +90,17 @@ class JunoTemplate(Pipeline):
     
     def setup(self) -> None:
         super().setup()
-
+        
         if self.snakemake_args["use_singularity"]:
             self.snakemake_args["singularity_args"] = " ".join(
                 [
                     self.snakemake_args["singularity_args"],
                     f"--bind {self.db_dir}:{self.db_dir}",
-                #    f"--nv",
+                    f"--nv",
                 ] # paths that singularity should be able to read from can be bound by adding to the above list
             )
+        if self.conda:
+            self.snakemake_args["use_conda"] = True
 
         # Extra class methods for this pipeline can be invoked here
         with open(
@@ -115,7 +125,10 @@ class JunoTemplate(Pipeline):
             "min_read_length": int(self.min_read_length),
             "exclusion_file": str(self.exclusion_file),
             "use_singularity": str(self.snakemake_args["use_singularity"]),
+            'use_conda':str(self.conda),
         }
+        #print(self.snakemake_args)
+        #print(self.user_parameters)
 
 
 if __name__ == "__main__":

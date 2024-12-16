@@ -13,4 +13,4 @@ rule spades:
     log:
         OUT + "/log/spades/{sample}.log"
     shell:
-        '/mnt/scratch_dir/puntm/irods_strains/SPAdes-4.0.0-Linux/bin/spades.py --pe1-1 {input.R1} --pe1-2 {input.R2} -o {output} > {log} 2>&1'
+        '/mnt/scratch_dir/puntm/local_software/SPAdes-4.0.0-Linux/bin/spades.py --pe1-1 {input.R1} --pe1-2 {input.R2} -o {output} > {log} 2>&1'

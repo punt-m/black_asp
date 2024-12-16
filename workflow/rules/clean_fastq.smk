@@ -17,7 +17,9 @@ rule clean_fastq:
     threads: config["threads"]["fastp"]
     resources:
         mem_gb=config["mem_gb"]["fastp"],
-        queue = config['queue']["default"]
+        queue = config['queue']["default"],
+        runtime_min = config["runtime_min"]["fastp"]
+
     log:
         OUT + "/log/clean_fastq/clean_fastq_{sample}.log",
     params:
@@ -59,7 +61,9 @@ rule qc_raw_fastq:
     threads: config["threads"]["fastqc"]
     resources:
         mem_gb=config["mem_gb"]["fastqc"],
-        queue = config['queue']["default"]
+        queue = config['queue']["default"],
+        runtime_min = config["runtime_min"]["fastqc"],
+
     params:
         output_dir=OUT + "/qc_raw_fastq/",
     log:
@@ -85,7 +89,9 @@ rule qc_clean_fastq:
     threads: config["threads"]["fastqc"]
     resources:
         mem_gb=config["mem_gb"]["fastqc"],
-        queue = config['queue']["default"]
+        queue = config['queue']["default"],
+        runtime_min = config["runtime_min"]["fastqc"],
+
     log:
         OUT + "/log/qc_clean_fastq/qc_clean_fastq_{sample}_{read}.log",
     params:

@@ -3,7 +3,7 @@ threads:
   helixer: 1
   fastp: 1
   fastqc: 4
-  interproscan: 4
+  interproscan: 8
   eggnog: 32
   fun_annotate: 8
   signalp: 8
@@ -13,7 +13,7 @@ mem_gb:
   helixer: 32
   fastp: 8
   fastqc: 8
-  interproscan: 32
+  interproscan: 16
   eggnog: 64
   fun_annotate: 16
   signalp: 16

@@ -3,8 +3,8 @@
 #The protein codon table can be adjusted, now its using default but might need some change for fungi
 rule agat:
     input: 
-        gff3 = rules.helixer.output,
-        fasta = rules.fun_annotate_sort.output
+        gff3 = OUT + "/helixer/gff/{sample}.gff3",
+        fasta =  OUT + "/sorted/{sample}.short.fa"
     output: 
         OUT + "/agat/proteins/{sample}.fa"
     log:

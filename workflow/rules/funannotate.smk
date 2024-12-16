@@ -4,11 +4,11 @@
 
 rule fun_annotate:
     input:
-        fasta  = rules.fun_annotate_sort.output,
-        gff    = rules.helixer.output,
-        ips    = rules.interproscan.output,
-        signalp= rules.signalp.output,
-        eggnog = rules.emapper.output
+        fasta  = OUT + "/sorted/{sample}.short.fa",
+        gff    = OUT + "/helixer/gff/{sample}.gff3",
+        ips    = OUT + "/interproscan/{sample}.xml",
+        signalp= OUT + '/signalp/{sample}',
+        eggnog = OUT + "/emapper/{sample}"
     output:
         directory(OUT + "/fun_annotate/{sample}")
     log:
@@ -26,7 +26,7 @@ rule fun_annotate:
     threads:
         config["threads"]["fun_annotate"]
     shell:
-        """"
+        """
         export FUNANNOTATE_DB={params.fun_db} ;
         funannotate annotate --gff {input.gff} \
                                 --fasta {input.fasta} \
@@ -39,5 +39,4 @@ rule fun_annotate:
                                 --out {output} \
                                 --cpus {threads} \
                                 >& {log}\
-
                                """

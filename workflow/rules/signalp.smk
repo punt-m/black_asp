@@ -1,6 +1,6 @@
 rule signalp:
     input:
-        rules.agat.output
+        OUT + "/agat/proteins/{sample}.fa"
     output:
         directory(OUT + '/signalp/{sample}')
     params:

@@ -1,14 +1,14 @@
 eggnog:
-  data_dir: '/mnt/scratch_dir/puntm/eggnog/'
-  dia_db: '/mnt/scratch_dir/puntm/eggnog/euriomycetes.dmnd'
+  data_dir: '/mnt/scratch_dir/puntm/local_software/eggnog/'
+  dia_db: '/mnt/scratch_dir/puntm/local_software/eggnog/euriomycetes.dmnd'
 fastx_toolkit:
   blocksize: 60
 fun_annotate:
   species: 'Aspergillus niger'
-  database: '/mnt/scratch_dir/puntm/funannotate_db/'
+  database: '/mnt/scratch_dir/puntm/local_software/funannotate_db/'
 interproscan:
-  exec: '/mnt/scratch_dir/puntm/interproscan/interproscan-5.69-101.0/interproscan.sh'
+  exec: '/mnt/scratch_dir/puntm/local_software/interproscan/interproscan-5.69-101.0/interproscan.sh'
 signalp:
-  models: '/mnt/scratch_dir/puntm/signalp/signalp6_fast/signalp-6-package/models/'
-  directory: '/mnt/scratch_dir/puntm/signalp/signalp6_fast/pkgs/bin/signalp6'
-  env: '/mnt/scratch_dir/puntm/signalp/signalp6_fast/pkgs/'
+  models: '/mnt/scratch_dir/puntm/local_software/signalp/signalp6_fast/signalp-6-package/models/'
+  directory: '/mnt/scratch_dir/puntm/local_software/signalp/signalp6_fast/pkgs/bin/signalp6'
+  env: '/mnt/scratch_dir/puntm/local_software/signalp/signalp6_fast/pkgs/'

@@ -2,7 +2,7 @@
 # we could consider using the tool w/o all the accepted annotation tools it now takes to reduce build time
 rule interproscan:
     input:
-        rules.agat.output
+        OUT + "/agat/proteins/{sample}.fa"
     output:
         xml = OUT + "/interproscan/{sample}.xml"
     params:
