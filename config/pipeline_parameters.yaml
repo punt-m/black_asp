@@ -21,7 +21,7 @@ mem_gb:
 runtime_min:
   default: 15
   spades: 180
-  helixer: 15
+  helixer: 40
   fastp: 60
   fastqc: 60
   interproscan: 480 #Takes about 6.5h at this stage
