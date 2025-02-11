@@ -6,7 +6,7 @@ rule agat:
         gff3 = OUT + "/helixer/gff/{sample}.gff3",
         fasta =  OUT + "/sorted/{sample}.short.fa"
     output: 
-        OUT + "/agat/proteins/{sample}.fa"
+        temp(OUT + "/agat/proteins/{sample}.fa")
     log:
         OUT + "/log/agat/{sample}.log"
     resources:

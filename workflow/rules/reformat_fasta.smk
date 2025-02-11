@@ -2,7 +2,7 @@ rule fasta_format:
     input:
         OUT + '/spades/{sample}'
     output:
-        OUT + "/fasta_format/{sample}.fa"
+        temp(OUT + "/fasta_format/{sample}.fa")
     params:
         blocksize = config['fastx_toolkit']['blocksize']
     resources:
@@ -20,11 +20,13 @@ rule fun_annotate_sort:
     input:
         fasta  = rules.fasta_format.output
     output:
-        OUT + "/sorted/{sample}.short.fa"
+        temp(OUT + "/sorted/{sample}.short.fa")
     log:
         OUT + "/log/fun_annotate/{sample}_sort.log"
     conda: 
         '../envs/funannotate.yml'
+    params:
+        scaffold_minsize = 1000
     resources:
         mem_gb = config["mem_gb"]["default"],
         runtime_min = config["runtime_min"]["default"],
@@ -35,6 +37,6 @@ rule fun_annotate_sort:
         """
         funannotate sort -i {input.fasta} \
                                   -o {output} \
-                                  --minlen 1 \
+                                  --minlen {params.scaffold_minsize} \
                                   >& {log} \
                                """

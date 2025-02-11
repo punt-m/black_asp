@@ -2,7 +2,7 @@ rule signalp:
     input:
         OUT + "/agat/proteins/{sample}.fa"
     output:
-        directory(OUT + '/signalp/{sample}')
+        temp(directory(OUT + '/signalp/{sample}'))
     params:
         models =  config["signalp"]["models"],
         signalp_dir = config["signalp"]["directory"],

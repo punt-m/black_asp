@@ -4,7 +4,7 @@ rule interproscan:
     input:
         OUT + "/agat/proteins/{sample}.fa"
     output:
-        xml = OUT + "/interproscan/{sample}.xml"
+        temp(xml = OUT + "/interproscan/{sample}.xml")
     params:
         tempdir = OUT + '/IPS_temp/{sample}',
         ips_exc = config['interproscan']['exec']

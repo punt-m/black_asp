@@ -3,7 +3,7 @@ rule emapper:
     input:
         OUT + "/agat/proteins/{sample}.fa"
     output:
-        directory(OUT + "/emapper/{sample}")
+        temp(directory(OUT + "/emapper/{sample}"))
     params:
         tempdir = OUT + '/temp/{sample}',
         data_dir = config['eggnog']['data_dir'],

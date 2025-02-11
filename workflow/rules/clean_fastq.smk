@@ -3,11 +3,11 @@ rule clean_fastq:
         r1=lambda wildcards: SAMPLES[wildcards.sample]["R1"],
         r2=lambda wildcards: SAMPLES[wildcards.sample]["R2"],
     output:
-        r1=OUT + "/clean_fastq/{sample}_pR1.fastq.gz",
-        r2=OUT + "/clean_fastq/{sample}_pR2.fastq.gz",
-        unpaired=OUT + "/clean_fastq/{sample}_unpaired_joined.fastq.gz",
+        r1=temp(OUT + "/clean_fastq/{sample}_pR1.fastq.gz"),
+        r2=temp(OUT + "/clean_fastq/{sample}_pR2.fastq.gz"),
+        unpaired=temp(OUT + "/clean_fastq/{sample}_unpaired_joined.fastq.gz"),
         html=OUT + "/clean_fastq/{sample}_fastp.html",
-        json=OUT + "/clean_fastq/{sample}_fastp.json",
+        json=temp(OUT + "/clean_fastq/{sample}_fastp.json"),
     message:
         "Filtering reads for {wildcards.sample}."
     #conda:
