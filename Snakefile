@@ -14,7 +14,8 @@ OUT = config["output_dir"]
 
 localrules:
     all,
-include: "workflow/rules/clean_fastq.smk"
+#Only needed for new samples, older onces can be taken from the already existing cleaned fastq files.    
+#include: "workflow/rules/clean_fastq.smk"
 include: "workflow/rules/spades.smk"
 include: "workflow/rules/reformat_fasta.smk"
 include: "workflow/rules/helixer.smk"
@@ -29,5 +30,5 @@ rule all:
     input:
         #expand(OUT + "/interproscan/test/"),
         #expand(OUT + '/spades/{sample}', sample = SAMPLES),
-        expand(OUT + "/fun_annotate/{sample}", sample = SAMPLES),
         #expand(OUT + "/interproscan/{sample}.xml", sample = SAMPLES),
+        expand(OUT + "/fun_annotate/{sample}", sample = SAMPLES),
