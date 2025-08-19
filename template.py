@@ -127,8 +127,8 @@ class JunoTemplate(Pipeline):
             "use_singularity": str(self.snakemake_args["use_singularity"]),
             'use_conda':str(self.conda),
         }
-        #print(self.snakemake_args)
-        #print(self.user_parameters)
+        print(self.snakemake_args)
+        print(self.user_parameters)
 
 
 if __name__ == "__main__":

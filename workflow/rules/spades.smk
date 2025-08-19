@@ -1,9 +1,8 @@
 rule spades:
     input:
-        R1=lambda wildcards: SAMPLES[wildcards.sample]["R1"],
-        R2=lambda wildcards: SAMPLES[wildcards.sample]["R2"],
-        #R1 = OUT + "/clean_fastq/{sample}_pR1.fastq.gz",
-        #R2 = OUT + "/clean_fastq/{sample}_pR2.fastq.gz",
+        R1 = rules.clean_fastq.output.r1,
+        R2 = rules.clean_fastq.output.r2,
+        unpaired = rules.clean_fastq.output.unpaired,
     output:
         directory(OUT + '/spades/{sample}')
     threads:
@@ -15,4 +14,10 @@ rule spades:
     log:
         OUT + "/log/spades/{sample}.log"
     shell:
-        '/mnt/scratch_dir/puntm/local_software/SPAdes-4.0.0-Linux/bin/spades.py --pe1-1 {input.R1} --pe1-2 {input.R2} --isolate -o {output} > {log} 2>&1'
+        """
+        /mnt/scratch_dir/puntm/local_software/SPAdes-4.0.0-Linux/bin/spades.py \
+            --pe1-1 {input.R1} \
+            --pe1-2 {input.R2} \
+            --pe1-s {input.unpaired} \
+            --isolate -o {output} > {log} 2>&1
+        """

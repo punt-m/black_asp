@@ -4,7 +4,7 @@ threads:
   fastp: 1
   fastqc: 4
   interproscan: 8
-  eggnog: 32
+  eggnog: 10
   fun_annotate: 8
   signalp: 8
   spades: 16
@@ -14,14 +14,14 @@ mem_gb:
   fastp: 8
   fastqc: 8
   interproscan: 16
-  eggnog: 64
+  eggnog: 16
   fun_annotate: 16
   signalp: 16
   spades: 16
 runtime_min:
   default: 15
   spades: 180
-  helixer: 40
+  helixer: 65 #Default set to 40min, but some genomes need longer apparently
   fastp: 60
   fastqc: 60
   interproscan: 480 #Takes about 6.5h at this stage

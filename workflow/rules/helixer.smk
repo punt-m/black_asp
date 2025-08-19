@@ -4,7 +4,7 @@ rule helixer:
     input: 
         rules.fun_annotate_sort.output
     output: 
-        temp(OUT + "/helixer/gff/{sample}.gff3")
+        OUT + "/helixer/gff/{sample}.gff3"
     log:
         OUT + "/log/helixer/{sample}.log"
     resources:
