@@ -14,10 +14,16 @@ rule spades:
     log:
         OUT + "/log/spades/{sample}.log"
     shell:
-        """
+        r"""
+        # check if unpaired exists and is >1MB
+        extra=""
+        if [ -s {input.unpaired} ] && [ $(stat -c%s {input.unpaired}) -gt 1000000 ]; then
+            extra="--pe1-s {input.unpaired}"
+        fi
+
         /mnt/scratch_dir/puntm/local_software/SPAdes-4.0.0-Linux/bin/spades.py \
             --pe1-1 {input.R1} \
             --pe1-2 {input.R2} \
-            --pe1-s {input.unpaired} \
+            $extra \
             --isolate -o {output} > {log} 2>&1
         """
