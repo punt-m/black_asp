@@ -23,13 +23,13 @@ include: "workflow/rules/extract_protein.smk"
 include: "workflow/rules/interproscan.smk"
 include: "workflow/rules/signalp.smk"
 include: "workflow/rules/emapper.smk"
+include: "workflow/rules/phobius.smk"
 include: "workflow/rules/funannotate.smk"
-#include: "workflow/rules/interproscan_standalone.smk"
 
 rule all:
     input:
         #expand(OUT + "/interproscan/test/"),
-        #expand(OUT + '/spades/{sample}', sample = SAMPLES),
-        #expand(OUT + "/interproscan/{sample}.xml", sample = SAMPLES),
+        #expand(OUT + '/spades/{sample}',                       sample = SAMPLES),
+        #expand(OUT + "/interproscan/{sample}.xml",             sample = SAMPLES),
         #expand(OUT + "/clean_fastq/{sample}_p{read}.fastq.gz", sample = SAMPLES, read = ["R1","R2"]),
-        expand(OUT + "/fun_annotate/{sample}", sample = SAMPLES),
+        expand(OUT + "/fun_annotate/{sample}",                  sample = SAMPLES),

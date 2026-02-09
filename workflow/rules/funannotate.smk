@@ -8,7 +8,9 @@ rule fun_annotate:
         gff    = OUT + "/helixer/gff/{sample}.gff3",
         ips    = OUT + "/interproscan/{sample}.xml",
         signalp= OUT + '/signalp/{sample}',
-        eggnog = OUT + "/emapper/{sample}"
+        eggnog = OUT + "/emapper/{sample}",
+        phobius= OUT + "/phobius/{sample}.txt",
+        
     output:
         directory(OUT + "/fun_annotate/{sample}")
     log:
@@ -33,6 +35,7 @@ rule fun_annotate:
                                 --eggnog {input.eggnog}/{params.strain}.emapper.annotations \
                                 --species "{params.species}"\
                                 --iprscan {input.ips} \
+                                --phobius {input.phobius} \
                                 --signalp {input.signalp}/prediction_results.txt \
                                 --strain {params.strain} \
                                 --force \

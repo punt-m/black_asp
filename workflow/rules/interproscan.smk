@@ -7,12 +7,12 @@ rule interproscan:
         xml = OUT + "/interproscan/{sample}.xml"
     params:
         tempdir = OUT + '/IPS_temp/{sample}',
-        ips_exc = config['interproscan']['exec']
     log:
         OUT + "/log/interproscan/{sample}.log"
-    conda:
-        "../envs/java11.yml"
-
+    ##conda:
+    ##    "../envs/java11.yml"
+    container:
+        "/mnt/scratch_dir/puntm/local_software/interproscan/interproscan/singularity/IPS_check"
     resources:
         mem_gb = config["mem_gb"]["interproscan"],
         runtime_min = config["runtime_min"]["interproscan"],
@@ -22,15 +22,16 @@ rule interproscan:
     shell:
         """
         mkdir -p {params.tempdir};
-        {params.ips_exc} --input {input} \
-                                          --disable-precalc \
-                                          --goterms \
-                                          -dra \
-                                          -appl SignalP_EUK,Pfam,TMHMM,SUPERFAMILY \
-                                          -o {output.xml} \
-                                          -f XML \
-                                          --tempdir {params.tempdir} \
-                                          --cpu {threads} \
-                                          >& {log} \
-                                          """
-        #                                  --applications Gene3D-4.3.0 \
+        /opt/interproscan/interproscan.sh \
+                                         --input {input} \
+                                         --disable-precalc \
+                                         --goterms \
+                                         -dra \
+                                         -appl Pfam,SUPERFAMILY \
+                                         -o {output.xml} \
+                                         -f XML \
+                                         --tempdir {params.tempdir} \
+                                         --cpu {threads} \
+                                         >& {log} \
+                                         """
+        #                                 --applications Gene3D-4.3.0 \

@@ -22,6 +22,6 @@ rule signalp:
         {params.signalp_dir} \
             --output_dir {output} \
             --model_dir {params.models} \
-            -org euk --mode fast -format none \
+            -org euk --mode fast -format short \
             -fasta {input}\
             --write_procs {threads} &> {log}"""

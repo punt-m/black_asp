@@ -12,3 +12,5 @@ signalp:
   models: '/mnt/scratch_dir/puntm/local_software/signalp/signalp6_fast/signalp-6-package/models/'
   directory: '/mnt/scratch_dir/puntm/local_software/signalp/signalp6_fast/pkgs/bin/signalp6'
   env: '/mnt/scratch_dir/puntm/local_software/signalp/signalp6_fast/pkgs/'
+phobius:
+  exec: '/mnt/scratch_dir/puntm/local_software/phobius/phobius.pl'
