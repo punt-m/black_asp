@@ -12,7 +12,8 @@ rule interproscan:
     ##conda:
     ##    "../envs/java11.yml"
     container:
-        "/mnt/scratch_dir/puntm/local_software/interproscan/interproscan/singularity/IPS_check"
+        "/mnt/scratch_dir/puntm/local_software/interproscan/singularity/IPS_check"
+        #docker://interpro/interproscan:5.77-108.0
     resources:
         mem_gb = config["mem_gb"]["interproscan"],
         runtime_min = config["runtime_min"]["interproscan"],
@@ -27,7 +28,7 @@ rule interproscan:
                                          --disable-precalc \
                                          --goterms \
                                          -dra \
-                                         -appl Pfam,SUPERFAMILY \
+                                         -appl Pfam \
                                          -o {output.xml} \
                                          -f XML \
                                          --tempdir {params.tempdir} \

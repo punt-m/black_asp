@@ -14,16 +14,16 @@ OUT = config["output_dir"]
 
 localrules:
     all,
-#Only needed for new samples, older onces can be taken from the already existing cleaned fastq files.    
+#Only needed for new samples, older onces can be taken from the already existing cleaned fastq files.   fastq>annotated genomes
 include: "workflow/rules/clean_fastq.smk"
 include: "workflow/rules/spades.smk"
-include: "workflow/rules/reformat_fasta.smk"
-include: "workflow/rules/helixer.smk"
+#include: "workflow/rules/reformat_fasta.smk"
+#include: "workflow/rules/helixer.smk"
 include: "workflow/rules/extract_protein.smk"
-include: "workflow/rules/interproscan.smk"
+#include: "workflow/rules/interproscan.smk"
 include: "workflow/rules/signalp.smk"
 include: "workflow/rules/emapper.smk"
-include: "workflow/rules/phobius.smk"
+#include: "workflow/rules/phobius.smk"
 include: "workflow/rules/funannotate.smk"
 
 rule all:

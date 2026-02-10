@@ -7,10 +7,11 @@ fun_annotate:
   species: 'Aspergillus niger'
   database: '/mnt/scratch_dir/puntm/local_software/funannotate_db/'
 interproscan:
-  exec: '/mnt/scratch_dir/puntm/local_software/interproscan/interproscan-5.69-101.0/interproscan.sh'
+  exec: '/mnt/scratch_dir/puntm/local_software/interproscan/singularity/IPS_check/'
 signalp:
   models: '/mnt/scratch_dir/puntm/local_software/signalp/signalp6_fast/signalp-6-package/models/'
   directory: '/mnt/scratch_dir/puntm/local_software/signalp/signalp6_fast/pkgs/bin/signalp6'
   env: '/mnt/scratch_dir/puntm/local_software/signalp/signalp6_fast/pkgs/'
 phobius:
   exec: '/mnt/scratch_dir/puntm/local_software/phobius/phobius.pl'
+  dir: '/mnt/scratch_dir/puntm/local_software/phobius'
